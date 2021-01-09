@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace:要关联的接口的全限定名 -->
+<mapper namespace="com.itheima.health.dao.CheckGroupDao">
+
+    <select id="findAll" resultType="CheckGroup">
+        select * from t_checkgroup
+    </select>
+
+    <select id="findPage" parameterType="String" resultType="CheckGroup">
+        select * from t_checkgroup
+        <where>
+            <if test="value != null and value.length > 0">
+                code like #{value} or name like #{value} or remark like #{value}
+            </if>
+        </where>
+    </select>
+
+    <insert id="add" parameterType="CheckGroup" >
+        insert into t_checkgroup (code,name,helpCode,sex,remark,attention) values (#{code},#{name},#{helpCode},#{sex},#{remark},#{attention})
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <insert id="addCheckGroupByCheckItemId">
+        insert into t_checkgroup_checkitem (checkgroup_id,checkitem_id) values (#{checkGroupId},#{checkItemId})
+    </insert>
+
+    <select id="findById" parameterType="int" resultType="CheckGroup">
+        select * from t_checkgroup where id = #{id}
+    </select>
+
+    <select id="findCheckItemsById" parameterType="int" resultType="int">
+        select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{id}
+    </select>
+
+    <select id="findByCheckItemId" parameterType="int" resultType="CheckItem">
+        select * from t_checkitem
+        <where>
+            id in
+            <foreach collection="list" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <update id="update" parameterType="CheckGroup">
+        update t_checkgroup set
+        code=#{code},
+        name=#{name},
+        helpCode=#{helpCode},
+        sex=#{sex},
+        remark=#{remark},
+        attention=#{attention}
+        where
+        id = #{id}
+    </update>
+
+    <delete id="deleteCheckItemIdsByCheckGroupId" parameterType="int">
+        delete from t_checkgroup_checkitem where checkgroup_id = #{id}
+    </delete>
+
+    <select id="findSetMealByCheckGroupId" parameterType="int" resultType="int">
+        select count(*) from t_setmeal_checkgroup where checkgroup_id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from t_checkgroup where id = #{id}
+    </delete>
+</mapper>

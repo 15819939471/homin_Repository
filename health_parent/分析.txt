@@ -1,0 +1,30 @@
+com.itheima.health
+查询所有
+1、在service包创建dao方法findAll,创建对应的映射配置文件xml
+2、在interface包创建service接口，创建findAll方法，
+3、在service包创建service接口的实现类，使用alibaba的@Service注解注册服务到注册中心，重写findAll方法调用dao层的findAll方法
+4、在web包创建controller类，添加@RestController注解，@RequestMapping注解定义url
+5、在controller类中使用注解@Reference订阅接口，获取接口的代理对象，使用代理对象调用方法获取查询的所有列表
+6、将返回结果封装到Result，返回给客户端
+
+新增检查项
+1、创建dao方法add,传入要添加的checkitem对象，创建对应的映射配置文件
+2、在interface接口包的service接口下创建add方法，参数为checkitem
+3、在接口的实现类下重写接口的方法add，传入参数checkitem
+4、在controller包下创建方法add，获取客户端的参数封装到checkitem中，添加requestmapping注解，
+    使用reference注解订阅接口服务并获取多去代理对象，通过代理对象调用add方法
+5、将结果封装到Result对象返回给客户端
+
+检查项分页查询
+1、在CheckItemController类下创建findPage方法，添加requestmapping注解绑定url为findPage、获取请求参数封装到QueryPageBean中
+    调用订阅接口调用findPage方法获取检查分页列表结果，封装到Result中返还给客户端
+2、重写订阅接口的方法findPage，将QueryPageBean传入findPage方法，将传入参数的查询条件修改为模糊查询，封装到结果中，
+3、查看有无添加注解AutowiredDI依赖注入，调用持久层方法findPage获取列表信息，添加映射配置文件
+
+新增检查组
+需求：一个检查组包含多个检查项目
+弹出添加窗口，回显该检查组的所有信息，回显所有的检查项目，勾选检查项目，点击提交把检查组id和勾选的检查项id发送给服务器。
+1、前端代码发送请求参数检查组id和要添加的检查项的id
+2、创建CheckGroupController类、在controller添加@RequestMapping注解Edit、调用接口方法查询检查组信息，调用接口方法添加检查组与检查项的关联信息，返还结果Result对象给客户端
+3、接口的实现类创建findGroup方法查询检查组信息，addCheckGroupByCheckItemId方法添加信息
+4、创建持久层对应方法和映射配置文件

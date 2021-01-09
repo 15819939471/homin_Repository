@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace:要关联的接口的全限定名 -->
+<mapper namespace="com.itheima.health.dao.OrderSettingDao">
+    
+    <select id="findByOrderSettingDate" parameterType="Date" resultType="OrderSetting">
+        select * from t_ordersetting where orderdate = #{orderDate,jdbcType = DATE}
+    </select>
+
+    <insert id="add" parameterType="OrderSetting" keyProperty="id" useGeneratedKeys="true">
+        insert into t_ordersetting (orderDate,number,reservations) values (#{orderDate,jdbcType = DATE},#{number},#{reservations})
+    </insert>
+
+    <update id="update" parameterType="OrderSetting">
+        update t_ordersetting set
+        orderDate = #{orderDate,jdbcType = DATE},number = #{number},reservations = #{reservations}
+        where orderDate = #{orderDate,jdbcType = DATE}
+    </update>
+
+    <select id="getOrderSettingByMonth" parameterType="String" resultType="Map">
+        select * from t_ordersetting where orderDate like #{month}
+    </select>
+
+    <update id="updateNumber" parameterType="OrderSetting">
+        update t_ordersetting set
+        number = #{number}
+        where orderDate = #{orderDate,jdbcType = DATE}
+    </update>
+</mapper>
