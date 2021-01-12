@@ -71,15 +71,15 @@ public class GenerateHtmlJob {
                     String[] split = setmealId.split("\\|");
                     // id|操作符0,1|时间戳 分割字段split
                     String id = split[0];
-                    //String status = split[1];
-                    String status = "1";
+                    String status = split[1];
+
                     // 判断操作符是删除还是添加
                     if (status.equals("1")) {
                         // 添加，调用generateStaticHtml方法传入id查询数据生成静态页面
                         generateSetMealDetailStaticHtml(id);
                     } else if (status.equals("0")){
                         // 判断该静态页面是否存在，存在则该删除静态页面
-                        File file = new File(Out_put_path + "setMeal_" + id + ".html");
+                        File file = new File(Out_put_path + "mobile_setMeal_" + id + ".html");
                         if (file.exists()) {
                             file.delete();
                         }

@@ -28,3 +28,5 @@ com.itheima.health
 2、创建CheckGroupController类、在controller添加@RequestMapping注解Edit、调用接口方法查询检查组信息，调用接口方法添加检查组与检查项的关联信息，返还结果Result对象给客户端
 3、接口的实现类创建findGroup方法查询检查组信息，addCheckGroupByCheckItemId方法添加信息
 4、创建持久层对应方法和映射配置文件
+
+

@@ -5,6 +5,7 @@ import com.itheima.health.constant.MessageConstant;
 import com.itheima.health.entity.Result;
 import com.itheima.health.pojo.SetMeal;
 import com.itheima.health.service.SetMealService;
+import com.itheima.health.utils.QiNiuUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/setmeal")
-public class MoblieController {
+public class MoblieSetMealController {
 
     @Reference
     private SetMealService setMealService;
@@ -40,6 +41,13 @@ public class MoblieController {
     @GetMapping("/findDetailById3")
     public Result findDetailById(int id){
         SetMeal setMeal = setMealService.findDetailById(id);
+        return new Result(true,MessageConstant.QUERY_SETMEAL_SUCCESS,setMeal);
+    }
+
+    @GetMapping("/findById")
+    public Result findById(int id){
+        SetMeal setMeal = setMealService.findById(id);
+        setMeal.setImg(QiNiuUtils.DOMAIN+setMeal.getImg());
         return new Result(true,MessageConstant.QUERY_SETMEAL_SUCCESS,setMeal);
     }
 }
