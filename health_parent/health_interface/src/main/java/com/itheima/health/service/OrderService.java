@@ -8,6 +8,6 @@ import java.util.Map;
  */
 public class OrderService {
     public void submit(Map<String, Object> dataMap) {
-        
+
     }
 }
