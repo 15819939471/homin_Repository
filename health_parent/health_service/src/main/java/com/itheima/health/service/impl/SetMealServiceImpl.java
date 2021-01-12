@@ -9,9 +9,15 @@ import com.itheima.health.entity.QueryPageBean;
 import com.itheima.health.exception.HealthException;
 import com.itheima.health.pojo.SetMeal;
 import com.itheima.health.service.SetMealService;
+import com.itheima.health.utils.POIUtils;
+import com.itheima.health.utils.QiNiuUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +29,8 @@ public class SetMealServiceImpl implements SetMealService {
 
     @Autowired
     private SetMealDao setMealDao;
+
+
 
     /**
      * 分页查询套餐列表
@@ -63,8 +71,8 @@ public class SetMealServiceImpl implements SetMealService {
      */
     @Override
     @Transactional
-    public void add(SetMeal setMeal, Integer[] checkGroupIds) {
-        setMealDao.add(setMeal);
+    public Integer add(SetMeal setMeal, Integer[] checkGroupIds) {
+        Integer id = setMealDao.add(setMeal);
         // 判断传入的检查组id是否为空
         if(checkGroupIds != null){
             // 不为空则添加到检查组和套餐的关联表
@@ -72,6 +80,7 @@ public class SetMealServiceImpl implements SetMealService {
                 setMealDao.addSetMealByCheckGroupId(setMeal.getId(),checkGroupId);
             }
         }
+        return id;
     }
 
     /**
@@ -113,5 +122,28 @@ public class SetMealServiceImpl implements SetMealService {
     @Override
     public List<String> findImgs() {
         return setMealDao.findImgs();
+    }
+
+    /**
+     * 查询所有套餐信息
+     * @return
+     */
+    @Override
+    public List<SetMeal> findAll() {
+        List<SetMeal> setMealList = setMealDao.findAll();
+        setMealList.forEach(setMeal -> setMeal.setImg(QiNiuUtils.DOMAIN + setMeal.getImg()));
+        return setMealList;
+    }
+
+    /**
+     * 根据Id查询套餐详情
+     * @param id
+     * @return
+     */
+    @Override
+    public SetMeal findDetailById(int id) {
+        SetMeal setMeal = setMealDao.findDetailById(id);
+        setMeal.setImg(QiNiuUtils.DOMAIN+setMeal.getImg());
+        return setMeal;
     }
 }

@@ -21,7 +21,7 @@ import java.util.List;
  * @author: Eric
  * @since: 2021/1/9
  */
-@Component
+//@Component
 public class CleanImgJob {
 
     private static final Logger log = LoggerFactory.getLogger(CleanImgJob.class);
@@ -54,19 +54,5 @@ public class CleanImgJob {
         log.info("清理垃圾图片完成....");
     }
 
-    public static void main(String[] args) {
-        List<String> list = new ArrayList<String>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
 
-        List<String> list2 = new ArrayList<String>();
-        list2.add("3");
-        list2.add("4");
-
-        list.removeAll(list2);
-        list.forEach(System.out::println);
-    }
 }

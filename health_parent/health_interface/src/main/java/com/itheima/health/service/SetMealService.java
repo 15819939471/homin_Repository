@@ -30,7 +30,7 @@ public interface SetMealService {
      * @param setMeal
      * @param checkGroupIds
      */
-    void add(SetMeal setMeal, Integer[] checkGroupIds);
+    Integer add(SetMeal setMeal, Integer[] checkGroupIds);
 
     /**
      * 查询套餐对应的检查组Id集合
@@ -51,5 +51,18 @@ public interface SetMealService {
      * @return
      */
     List<String> findImgs();
+
+    /**
+     * 查询所有的套餐信息
+     * @return
+     */
+    List<SetMeal> findAll();
+
+    /**
+     * 根据Id查询套餐详情
+     * @param id
+     * @return
+     */
+    SetMeal findDetailById(int id);
 }
 

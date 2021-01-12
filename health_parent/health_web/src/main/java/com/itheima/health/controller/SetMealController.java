@@ -11,13 +11,19 @@ import com.itheima.health.service.SetMealService;
 import com.itheima.health.utils.QiNiuUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import java.util.List;
@@ -35,6 +41,12 @@ public class SetMealController {
 
     @Reference
     private SetMealService setMealService;
+
+    @Autowired
+    private JedisPool jedisPool;
+
+    private Jedis jedis;
+    private SimpleDateFormat sdf;
 
     /**
      * 上传文件
@@ -92,7 +104,14 @@ public class SetMealController {
      */
     @RequestMapping("/add")
     public Result add(@RequestBody SetMeal setMeal,Integer[] checkGroupIds){
-        setMealService.add(setMeal,checkGroupIds);
+        Integer id = setMealService.add(setMeal,checkGroupIds);
+
+        // 修改为静态页面添加操作符到redis数据库
+        Jedis jedis = jedisPool.getResource();
+        Long currentTimeMillis = System.currentTimeMillis();
+        jedis.zadd("setMeal:static:html",currentTimeMillis.doubleValue(),id+"|1"+currentTimeMillis.doubleValue());
+        jedis.close();
+
         return new Result(true,MessageConstant.ADD_SETMEAL_SUCCESS);
     }
 
@@ -105,6 +124,7 @@ public class SetMealController {
     public Result findCheckGroupIds(int id){
         List<Integer> resulList = setMealService.findCheckGroupIdsBySetmealId(id);
         return new Result(true,MessageConstant.QUERY_SETMEAL_SUCCESS,resulList);
+
     }
 
     /**
@@ -114,6 +134,15 @@ public class SetMealController {
     @RequestMapping("/update")
     public Result update(@RequestBody SetMeal setMeal,Integer[] checkGroupIds){
         setMealService.update(setMeal,checkGroupIds);
+
+
+        // 修改为静态页面添加操作符到redis数据库
+        jedis = jedisPool.getResource();
+        sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Long currentTimeMillis = System.currentTimeMillis();
+        jedis.zadd("setMeal:static:html",currentTimeMillis.doubleValue(),setMeal.getId()+"|1"+ sdf.format(new Date()));
+        jedis.close();
+
         return new Result(true,MessageConstant.ADD_SETMEAL_SUCCESS);
     }
 }

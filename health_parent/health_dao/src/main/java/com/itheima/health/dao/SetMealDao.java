@@ -30,7 +30,7 @@ public interface SetMealDao {
      * 添加套餐
      * @param setMeal
      */
-    void add(SetMeal setMeal);
+    Integer add(SetMeal setMeal);
 
     /**
      * 根据检查组Id添加信息到关联表
@@ -69,4 +69,17 @@ public interface SetMealDao {
      * @return
      */
     List<String> findImgs();
+
+    /**
+     * 查询所有的套餐信息
+     * @return
+     */
+    List<SetMeal> findAll();
+
+    /**
+     * 根据Id查询套餐详情
+     * @param id
+     * @return
+     */
+    SetMeal findDetailById(int id);
 }

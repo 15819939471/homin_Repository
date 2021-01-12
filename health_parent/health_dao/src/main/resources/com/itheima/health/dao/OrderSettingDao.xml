@@ -20,7 +20,8 @@
     </update>
 
     <select id="getOrderSettingByMonth" parameterType="String" resultType="Map">
-        select * from t_ordersetting where orderDate like #{month}
+       select CAST(DATE_FORMAT(orderdate,'%d') AS SIGNED) date,number,reservations
+        From t_ordersetting where orderDate like #{month}
     </select>
 
     <update id="updateNumber" parameterType="OrderSetting">

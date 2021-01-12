@@ -17,6 +17,23 @@
         <servlet-name>springMVC</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+
+
+<!-- ArrayIndexOutOfBoundsException:Could not find key 'spring.liveBeansView.mbeanDomain' in any property source  -->
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>dev</param-value>
+    </context-param>
+    <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>dev</param-value>
+    </context-param>
+    <context-param>
+        <param-name>spring.liveBeansView.mbeanDomain</param-name>
+        <param-value>dev</param-value>
+    </context-param>
+
+
     <!--解决post请求的乱码过滤器-->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
