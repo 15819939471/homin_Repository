@@ -34,7 +34,7 @@ public class MoblieSetMealController {
     }
 
     /**
-     * 根据Id套餐信息
+     * 根据Id查询套餐详细信息
      * @param id
      * @return
      */
@@ -44,10 +44,18 @@ public class MoblieSetMealController {
         return new Result(true,MessageConstant.QUERY_SETMEAL_SUCCESS,setMeal);
     }
 
+    /**
+     * 根据Id查询套餐信息
+     * @param id
+     * @return
+     */
     @GetMapping("/findById")
     public Result findById(int id){
         SetMeal setMeal = setMealService.findById(id);
         setMeal.setImg(QiNiuUtils.DOMAIN+setMeal.getImg());
         return new Result(true,MessageConstant.QUERY_SETMEAL_SUCCESS,setMeal);
     }
+
+
+
 }
