@@ -66,7 +66,7 @@ public class GenerateHtmlJob {
         // 判断redis数据库的状态码是否为空
         try {
             if (!CollectionUtils.isEmpty(setmealIds)) {
-                /*for (String setmealId : setmealIds) {
+                for (String setmealId : setmealIds) {
                     // 切割key获取操作符
                     String[] split = setmealId.split("\\|");
                     // id|操作符0,1|时间戳 分割字段split
@@ -85,8 +85,8 @@ public class GenerateHtmlJob {
                         }
                     }
                     // 执行完以后删除key
-                    jedis.zrem("setMeal:static:html",setmealId);
-                }*/
+                    //jedis.zrem("setMeal:static:html",setmealId);
+                }
                 // 生成静态套餐列表页面
                 generateSetMealListStaticHtml();
             }
@@ -99,19 +99,18 @@ public class GenerateHtmlJob {
     /**
      * 生成套餐详情列表页面
      */
-    private void generateSetMealListStaticHtml() throws IOException, TemplateException {
+    public  void generateSetMealListStaticHtml() throws IOException, TemplateException {
         // 查询所有套餐信息
         List<SetMeal> setMealList = setMealService.findAll();
-        setMealList.forEach(setMeal -> setMeal.setImg(QiNiuUtils.DOMAIN +setMeal.getImg()));
         // 获取模板
-        Template template = configuration.getTemplate("mobilesetMeal.ftl");
-        String fileName = Out_put_path+"setMeal.html";
+        Template template = configuration.getTemplate("mobile_setMeal.ftl");
+        String fileName = Out_put_path+"mobile_setMeal.html";
         // 将文件字节流转换为字符流，再获取传输速度更快的缓冲流
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"utf-8"));
         // 将数据信息绑定到模板上
-        Map<String,Object> dataMap = new HashMap<String,Object>();
-        template.process(setMealList,writer);
+        HashMap<String, Object> dataMap = new HashMap<>();
         dataMap.put("setMealList",setMealList);
+        template.process(dataMap,writer);
         // 关闭流
         writer.flush();
         writer.close();
@@ -123,27 +122,23 @@ public class GenerateHtmlJob {
      *
      * @param id
      */
-    private void generateSetMealDetailStaticHtml(String id) throws IOException, TemplateException {
+    public  void generateSetMealDetailStaticHtml(String id) throws IOException, TemplateException {
         // 查询套餐详情列表
         SetMeal setMeal = setMealService.findDetailById(Integer.valueOf(id));
-        setMeal.setImg(QiNiuUtils.DOMAIN+setMeal.getImg());
         // 获取模板
-        Template template = configuration.getTemplate("mobilesetMealdetail.ftl");
-        String fileName = Out_put_path+"setMeal"+id+".html";
+        Template template = configuration.getTemplate("mobile_setMeal_detail.ftl");
+        String fileName = Out_put_path+"mobile_setMeal"+id+".html";
         // 将文件字节流转换为字符流，再获取传输速度更快的缓冲流
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"utf-8"));
         // 将数据信息绑定到模板上
-        template.process(setMeal,writer);
+        HashMap<String, Object> dataMap = new HashMap<>();
+        dataMap.put("setMeal",setMeal);
+        template.process(dataMap,writer);
         // 关闭流
         writer.flush();
         writer.close();
     }
 
-    @Test
-    public void test(){
-        Long currentTimeMillis = System.currentTimeMillis();
-        double v = currentTimeMillis.doubleValue();
-        System.out.println(v);
-    }
+
 
 }

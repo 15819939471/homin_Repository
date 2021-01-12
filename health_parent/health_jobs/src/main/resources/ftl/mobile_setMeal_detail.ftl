@@ -23,24 +23,24 @@
     <div class="contentBox">
         <div class="card">
             <div class="project-img">
-                <img src="${setmeal.img}" width="100%" height="100%" />
+                <img src="${setMeal.img}" width="100%" height="100%" />
             </div>
             <div class="project-text">
-                <h4 class="tit">${setmeal.name}</h4>
-                <p class="subtit">${setmeal.remark}</p>
+                <h4 class="tit">${setMeal.name}</h4>
+                <p class="subtit">${setMeal.remark}</p>
                 <p class="keywords">
                     <span>
-                        <#if setmeal.sex=='0'>
+                        <#if setMeal.sex=='0'>
                             性别不限
                         <#else>
-                            <#if setmeal.sex=='1'>
+                            <#if setMeal.sex=='1'>
                                 男
                             <#else>
                                 女
                             </#if>
                         </#if>
                     </span>
-                    <span>${setmeal.age}</span>
+                    <span>${setMeal.age}</span>
                 </p>
             </div>
         </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="table-content">
                     <ul class="table-list">
-                        <#list setmeal.checkGroups as checkgroup>
+                        <#list setMeal.checkGroups as checkgroup>
                             <li class="table-item">
                                 <div class="item flex2">${checkgroup.name}</div>
                                 <div class="item flex3">
@@ -73,7 +73,7 @@
                     </ul>
                 </div>
                 <div class="box-button">
-                    <a href="orderInfo.html?id=${setmeal.id}" class="order-btn">立即预约</a>
+                    <a href="orderInfo.html?id=${setMeal.id}" class="order-btn">立即预约</a>
                 </div>
             </div>
         </div>
