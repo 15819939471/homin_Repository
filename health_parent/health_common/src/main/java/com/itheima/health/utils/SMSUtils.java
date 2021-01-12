@@ -13,7 +13,6 @@ import com.aliyuncs.profile.IClientProfile;
  * 短信发送工具类
  * LTAI4G6E9u6jNwT4QY7bbxEy
  * UKc2mGPaOIBr6EWQ4tZ4oNKInAgvQb
- * 13652431027
  */
 public class SMSUtils {
 	public static final String VALIDATE_CODE = "SMS_189616640";//发送短信验证码模板编码  模版CODE
@@ -24,7 +23,8 @@ public class SMSUtils {
 	private static final String SECRET_KEY="UKc2mGPaOIBr6EWQ4tZ4oNKInAgvQb"; //你的AccessKey Secret
 
 	public static void main(String[] args) throws ClientException {
-		SMSUtils.sendShortMessage(VALIDATE_CODE,"15819939471","666666");
+
+		SMSUtils.sendShortMessage(VALIDATE_CODE,"13652431027","666666");
 	}
 
 	/**
