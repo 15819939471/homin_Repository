@@ -4,6 +4,7 @@ import com.itheima.health.pojo.SetMeal;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SetMealDao {
     /**
@@ -82,4 +83,12 @@ public interface SetMealDao {
      * @return
      */
     SetMeal findDetailById(int id);
+
+    /**
+     * 查询套餐预约人数占比
+     * 返回数据setmealNames  setmealCount:value,name
+     * @return
+     */
+    List<Map<String,String>> getSetMealCount();
+
 }

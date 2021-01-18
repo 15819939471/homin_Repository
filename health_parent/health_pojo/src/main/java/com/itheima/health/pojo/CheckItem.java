@@ -1,5 +1,7 @@
 package com.itheima.health.pojo;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -7,10 +9,12 @@ import java.io.Serializable;
  */
 public class CheckItem implements Serializable {
     private Integer id;//主键
+    @NotBlank(message = "编码不能为空，请重新输入")
     private String code;//项目编码
     private String name;//项目名称
     private String sex;//适用性别
     private String age;//适用年龄（范围），例如：20-50
+    @Min(value = 1,message = "价格不能低于一元")
     private Float price;//价格
     private String type;//检查项类型，分为检查和检验两种类型
     private String remark;//项目说明

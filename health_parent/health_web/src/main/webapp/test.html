@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:h3="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios-0.18.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <button id="testHasAuthority" onclick="test1()">测试hasAuthority</button>
+    <button id="testRole" onclick="test2()">测试hasRole</button>
+
+    <div>
+        {{word}}
+    </div>
+</div>
+
+
+</body>
+<script>
+    var vue = new vue({
+        el: '#app1',
+        data: {
+            word: "你好中国"
+        },
+        methods: {
+            test1() {
+                axios.get('/test/a').then(res => {
+                    this.$message({
+                        message: res.data.message,
+                        type: res.data.flag ? "success" : "error"
+                    })
+                    if (res.data.flag) {
+                        this.word = res.data.data;
+                    }
+                })
+            },
+            test2() {
+                axios.get('/test/b').then(res => {
+                    this.$message({
+                        message: res.data.message,
+                        type: res.data.flag ? "success" : "error"
+                    })
+                    if (res.data.flag) {
+                        this.word = res.data.data;
+                    }
+                })
+            }
+        }
+    })
+</script>
+</html>

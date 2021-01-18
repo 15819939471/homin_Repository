@@ -38,4 +38,17 @@ public interface OrderSettingDao {
      * @param orderSetting
      */
     void updateNumber(OrderSetting orderSetting);
+
+    /**
+     * 根据日期查询当天是否可预约
+     * @param orderDate
+     * @return
+     */
+    OrderSetting findOrderSettingByOrderDate(Date orderDate);
+
+    /**
+     * 更新预约人数
+     * @param orderDate
+     */
+    void editReservationsByOrderDate(Date orderDate);
 }

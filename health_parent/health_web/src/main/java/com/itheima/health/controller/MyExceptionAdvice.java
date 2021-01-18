@@ -4,6 +4,9 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.itheima.health.entity.Result;
 import com.itheima.health.exception.HealthException;
+import com.itheima.health.exception.UserNameNotFoudException;
+import org.springframework.expression.spel.SpelEvaluationException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -25,9 +28,22 @@ public class MyExceptionAdvice {
         return result;
     }
 
+    @ExceptionHandler(value = UserNameNotFoudException.class)
+    public Result UserNameNotFoundException(UserNameNotFoudException userNameNotFoundException){
+        String message = userNameNotFoundException.getMessage();
+        return new Result(false,message);
+    }
+
     @ExceptionHandler(value = Exception.class)
     public Result businessException(Exception exception){
         log.error("发生异常",exception);
         return new Result(false, "发生未知错误，操作失败，请联系管理员");
     }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public Result spelEvaluationException(MethodArgumentNotValidException exception){
+        log.error("发生异常",exception);
+        return new Result(false, "价格不能过低！");
+    }
+
 }

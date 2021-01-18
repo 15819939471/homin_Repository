@@ -19,6 +19,7 @@ import redis.clients.jedis.JedisPool;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author homin
@@ -145,5 +146,15 @@ public class SetMealServiceImpl implements SetMealService {
         SetMeal setMeal = setMealDao.findDetailById(id);
         setMeal.setImg(QiNiuUtils.DOMAIN+setMeal.getImg());
         return setMeal;
+    }
+
+    /**
+     * 查询套餐预约人数占比
+     * 返回数据setmealNames  setmealCount:value,name
+     * @return
+     */
+    @Override
+    public List<Map<String,String>> getSetMealCount() {
+        return setMealDao.getSetMealCount();
     }
 }

@@ -7,6 +7,8 @@ import com.itheima.health.entity.QueryPageBean;
 import com.itheima.health.pojo.CheckItem;
 import com.itheima.health.entity.Result;
 import com.itheima.health.service.CheckItemService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +31,7 @@ public class CheckItemController {
      *
      * @return
      */
+    @PreAuthorize(value = "hasAuthority(CHECKITEM_QUERY)")
     @RequestMapping("findAll")
     public Result findAll() {
         //查询所有检查列表信息
@@ -40,8 +43,9 @@ public class CheckItemController {
     /**
      * 新增检查项目
      */
+    @PreAuthorize(value = "hasAuthority(CHECKITEM_QUERY)")
     @RequestMapping("/add")
-    public Result add(@RequestBody CheckItem checkItem) {
+    public Result add(@Validated @RequestBody CheckItem checkItem) {
         checkItemService.add(checkItem);
         Result result = new Result(true, MessageConstant.ADD_CHECKGROUP_SUCCESS);
         return result;

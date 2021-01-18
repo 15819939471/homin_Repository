@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace:要关联的接口的全限定名 -->
+<mapper namespace="com.itheima.health.dao.UserDao">
+    <select id="getUserDetails" parameterType="String" resultMap="UserDetailsMap">
+        select
+            u.id,u.username,u.password,
+            r.keyword roleKeyWord,
+            p.keyword permissionKeyWord
+        from
+            t_user u
+            left join t_user_role ur on u.id=ur.user_id
+            left join t_role r on ur.role_id = r.id
+            left join t_role_permission rp on r.id = rp.role_id
+            left join t_permission p on p.id=rp.permission_id
+        where
+            u.username = #{username}
+    </select>
+    <resultMap id="UserDetailsMap" type="User">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <collection property="roles" column="id" ofType="Role">
+            <id property="id" column="id"></id>
+            <result property="keyword" column="RoleKeyWord"></result>
+            <collection property="permissions" column="id" ofType="Permission">
+                <id property="id" column="id"></id>
+                <result property="keyword" column="PermissionKeyWord"></result>
+            </collection>
+        </collection>
+    </resultMap>
+</mapper>

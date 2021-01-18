@@ -1,9 +1,11 @@
 package com.itheima.health.controller;
 
 import com.aliyuncs.exceptions.ClientException;
+import com.itheima.health.constant.Constants;
 import com.itheima.health.constant.RedisMessageConstant;
 import com.itheima.health.entity.Result;
 import com.itheima.health.utils.SMSUtils;
+import com.itheima.health.utils.TentcentSMS;
 import com.itheima.health.utils.ValidateCodeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,16 +49,43 @@ public class ValidateCodeController {
         // key为空，验证码未发送
         // 生成验证码
         Integer code = ValidateCodeUtils.generateValidateCode(6);
-//        try {
-//            // 发送验证码
-//            SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE, telephone, code.toString());
-//            // 并将该手机的验证码状态存储到redis数据库
-//            return new Result(true, "发送验证码成功");
-//        } catch (ClientException e) {
-//            log.error("发送验证码失败", e);
-        //return new Result(false, "发送验证码失败");
-//        }
-        jedis.setex(RedisMessageConstant.SENDTYPE_ORDER + telephone, 10 * 60, code.toString());
+        try {
+            String[] templateParams = {code+""};
+            TentcentSMS.sendRegCode(templateParams,telephone,"846285");
+        } catch (Exception e) {
+            log.error("发送验证码失败", e);
+        return new Result(false, "发送验证码失败");
+        }
+        jedis.setex(RedisMessageConstant.SENDTYPE_ORDER +"_"+ telephone, 10 * 60, code.toString());
         return new Result(true, "验证码已发送，请注意查收");
+    }
+
+    @PostMapping("/send4Login")
+    public Result send4Login(String telephone){
+        // 获取jedis连接
+        Jedis jedis = jedisPool.getResource();
+        // 校验该验证码是否存在
+        // 拼接手机号查询验证码
+        String keystr =  RedisMessageConstant.SENDTYPE_LOGIN +"_"+ telephone;
+        log.info(jedis.get(keystr));
+        if (jedis.exists(keystr)) {
+            // 存在则返回验证码已发送
+            return new Result(true,"验证码已发送，请注意查收");
+        } else {
+            // 生成验证码，设定验证码有效期为10分钟
+            Integer validateCode = ValidateCodeUtils.generateValidateCode(6);
+            log.info(validateCode+"");
+            // 发送验证码
+            try {
+                //SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE,telephone,validateCode);
+                String[] templateParams = {validateCode+""};
+                TentcentSMS.sendRegCode(templateParams,telephone,"846285");
+            } catch (Exception e) {
+                log.error("发送验证码失败");
+                return new Result(false, "发送验证码失败,请稍后再试");
+            }
+            jedis.setex(keystr,60*10,validateCode+"");
+        }
+        return new Result(true,"验证码已发送，请注意查收");
     }
 }
