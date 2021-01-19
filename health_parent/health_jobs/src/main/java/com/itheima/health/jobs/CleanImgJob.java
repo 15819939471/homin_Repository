@@ -32,7 +32,7 @@ public class CleanImgJob {
     /**
      * 清理七牛上的垃圾图片
      */
-    @Scheduled(initialDelay = 3000,fixedDelay = 1800000)
+  @Scheduled(initialDelay = 3000,fixedDelay = 1800000)
 //    @Scheduled(cron = "0 0 4 * * ?")
     public void cleanImg(){
         log.info("开发执行清理垃圾图片....");

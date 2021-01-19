@@ -58,7 +58,7 @@ public class GenerateHtmlJob {
         configuration.setClassForTemplateLoading(GenerateHtmlJob.class, "/ftl");
     }
 
-    @Scheduled(initialDelay = 2000, fixedDelay = 200000)
+    //@Scheduled(initialDelay = 2000, fixedDelay = 200000)
     public void generateStaticHtmlJob() {
         // 获取redis数据库的操作状态码
         Jedis jedis = jedisPool.getResource();

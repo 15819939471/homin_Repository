@@ -8,6 +8,12 @@ import java.util.Map;
 
 public interface OrderSettingDao {
     /**
+     * 清理过期预约设定
+     * @param date
+     */
+    void cleanExpireOrderSetting(String date);
+
+    /**
      * 查询预约设置
      * @param orderDate
      * @return

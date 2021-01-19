@@ -1,0 +1,12 @@
+.idea
+target
+*.iml
+test
+
+/health_parent/health_common/src/main/java/com/itheima/health/utils/SMSUtils.java
+/health_parent/health_common/src/main/java/com/itheima/health/utils/SendSms.java
+/health_parent/health_common/src/main/java/com/itheima/health/utils/SMSUtils.java
+SMSUtils.java
+SendSms.java
+SMSUtils.java
+TentcentSMS.java

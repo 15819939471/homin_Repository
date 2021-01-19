@@ -38,4 +38,9 @@
         update t_ordersetting set reservations = reservations+1 where orderDate = #{orderDate,jdbcType=DATE}
         and reservations &lt; number
     </update>
+
+    <!-- 清理过期预约设定  -->
+    <delete id="cleanExpireOrderSetting" parameterType="String">
+        delete from t_orderSetting where orderDate &lt; #{date}
+    </delete>
 </mapper>

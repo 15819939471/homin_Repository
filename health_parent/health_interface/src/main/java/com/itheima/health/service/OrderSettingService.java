@@ -31,4 +31,9 @@ public interface OrderSettingService {
      */
     void update(OrderSetting orderSetting);
 
+    /**
+     * 清理过期预约设定
+     * @param date
+     */
+    void cleanExpireOrderSetting(String date);
 }

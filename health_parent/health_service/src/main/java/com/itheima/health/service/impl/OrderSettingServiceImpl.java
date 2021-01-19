@@ -69,6 +69,7 @@ public class OrderSettingServiceImpl implements OrderSettingService {
         }
     }
 
+
     /**
      * 根据月份获取预约设置信息
      * @param month
@@ -79,5 +80,15 @@ public class OrderSettingServiceImpl implements OrderSettingService {
         month += "%";
         List<Map<String, Integer>> orderSettingList = orderSettingDao.getOrderSettingByMonth(month);
         return orderSettingList;
+    }
+
+    /**
+     * 清理过期预约设定
+     * @param date
+     */
+    @Override
+    public void cleanExpireOrderSetting(String date) {
+        // 清理过期预约设定
+        orderSettingDao.cleanExpireOrderSetting(date);
     }
 }
