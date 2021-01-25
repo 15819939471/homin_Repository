@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/../day02_SpringBoot_demo1_another/pom.xml" />
+        <option value="$PROJECT_DIR$/../day02_SpringBoot_demo1/pom.xml" />
+        <option value="$PROJECT_DIR$/../day02_SpringBoot_demo2_Import/pom.xml" />
+        <option value="$PROJECT_DIR$/../day02_SpringBoot_demo3_ImportSelector/pom.xml" />
+        <option value="$PROJECT_DIR$/../day02_SpringBoot_demo4_MyStarter/pom.xml" />
+        <option value="$PROJECT_DIR$/../day02_SpringBoot_demo4_testMyStarter/pom.xml" />
+        <option value="$PROJECT_DIR$/../springboot-admin-server/pom.xml" />
+        <option value="$PROJECT_DIR$/../springboot-admin-client/pom.xml" />
+        <option value="$PROJECT_DIR$/../day02_SpringBoot_RegistryBean/pom.xml" />
+        <option value="$PROJECT_DIR$/../day02_SpringBoot_Bean/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

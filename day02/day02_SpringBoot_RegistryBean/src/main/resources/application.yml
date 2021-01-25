@@ -1,0 +1,10 @@
+myapp:
+  user:
+    name: "圣枪游侠"
+    age: 18
+  student:
+    name: "奥巴马"
+    age: "18"
+  teacher:
+    name: "杨永信"
+    age: 20

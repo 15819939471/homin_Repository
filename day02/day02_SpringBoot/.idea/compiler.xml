@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="day02_SpringBoot" />
+        <module name="day02_SpringBoot_Bean" />
+        <module name="day02_SpringBoot_demo1" />
+        <module name="day02_SpringBoot_demo1_another" />
+        <module name="day02_SpringBoot_demo2_Import" />
+        <module name="day02_SpringBoot_demo3_ImportSelector" />
+        <module name="day02_SpringBoot_demo4_MyStarter" />
+        <module name="day02_SpringBoot_demo4_testMyStarter" />
+        <module name="day02_SpringBoot_RegistryBean" />
+        <module name="springboot-admin-client" />
+        <module name="springboot-admin-server" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

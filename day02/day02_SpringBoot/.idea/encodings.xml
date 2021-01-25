@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../day02_SpringBoot_Bean" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../day02_SpringBoot_RegistryBean" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../day02_SpringBoot_demo1" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../day02_SpringBoot_demo1_another" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../day02_SpringBoot_demo2_Import" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../day02_SpringBoot_demo3_ImportSelector" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../day02_SpringBoot_demo4_MyStarter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../day02_SpringBoot_demo4_testMyStarter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../springboot-admin-client" charset="UTF-8" />
+  </component>
+</project>
